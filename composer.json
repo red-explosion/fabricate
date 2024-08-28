@@ -1,18 +1,18 @@
 {
-    "name": "red-explosion/package_slug",
-    "description": "package_description",
+    "name": "red-explosion/fabricate",
+    "description": "Laravel scaffolding/starter kit for building new applications.",
     "license": "MIT",
-    "homepage": "https://github.com/red-explosion/package_slug",
+    "homepage": "https://github.com/red-explosion/fabricate",
     "type": "library",
     "keywords": [
         "red-explosion",
         "laravel",
-        "package_slug"
+        "fabricate"
     ],
     "authors": [
         {
-            "name": "author_name",
-            "email": "author@email.com"
+            "name": "Ben Sherred",
+            "email": "ben@sherred.co.uk"
         }
     ],
     "require": {
@@ -30,12 +30,12 @@
     },
     "autoload": {
         "psr-4": {
-            "RedExplosion\\Skeleton\\": "src/"
+            "RedExplosion\\Fabricate\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "RedExplosion\\Skeleton\\Tests\\": "tests/"
+            "RedExplosion\\Fabricate\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -52,7 +52,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "RedExplosion\\Skeleton\\SkeletonServiceProvider"
+                "RedExplosion\\Fabricate\\FabricateServiceProvider"
             ]
         }
     },
