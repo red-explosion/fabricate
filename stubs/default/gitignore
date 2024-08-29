@@ -1,0 +1,39 @@
+# OS
+.DS_Store
+
+# IDE
+/.fleet
+/.idea
+/.vscode
+
+# Package Managers
+/node_modules
+/vendor
+
+# Environment
+.env
+.env.backup
+.env.production
+.env.staging
+
+# Framework
+/bootstrap/ssr
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+
+# Laravel Octane
+/caddy
+frankenphp
+frankenphp-worker.php
+
+# Local Dev
+.phpactor.json
+.phpunit.cache
+.phpunit.result.cache
+_ide_helper.php
+_ide_helper_models.php
+auth.json
+phpstan.neon
+phpunit.xml.dist

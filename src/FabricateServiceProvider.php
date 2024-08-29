@@ -4,27 +4,33 @@ declare(strict_types=1);
 
 namespace RedExplosion\Fabricate;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class FabricateServiceProvider extends ServiceProvider
+class FabricateServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(
-            path: __DIR__ . '/../config/fabricate.php',
-            key: 'fabricate',
-        );
     }
 
     public function boot(): void
     {
-        if ($this->app->runningInConsole()) {
-            $this->publishes(
-                paths: [
-                    __DIR__ . '/../config/fabricate.php' => config_path('fabricate.php'),
-                ],
-                groups: 'fabricate-config',
-            );
+        if (! $this->app->runningInConsole()) {
+            return;
         }
+
+        $this->commands([
+            Console\InstallCommand::class,
+        ]);
+    }
+
+    /**
+     * @return array<int, class-string>
+     */
+    public function provides(): array
+    {
+        return [
+            Console\InstallCommand::class,
+        ];
     }
 }
