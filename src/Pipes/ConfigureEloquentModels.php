@@ -17,8 +17,6 @@ class ConfigureEloquentModels
 
     public function handle(InstallData $data, Closure $next)
     {
-        // todo: remove fillable from user model
-
         $this->replaceInFile->handle(
             <<<EOT
             use Illuminate\Support\ServiceProvider;

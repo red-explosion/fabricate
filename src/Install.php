@@ -13,6 +13,7 @@ class Install extends Pipeline
     {
         return $this->send($data)
             ->through([
+                // todo: composer meta
                 Pipes\InstallComposerDependencies::class,
                 Pipes\InstallYarnDependencies::class,
                 Pipes\PublishStubs::class,
@@ -26,6 +27,11 @@ class Install extends Pipeline
                 Pipes\RemoveMigrationComments::class,
                 Pipes\RemoveDownMigrations::class,
                 Pipes\ConfigureEloquentModels::class,
+                Pipes\RemoveFillableAttributes::class,
+                Pipes\AddIsAdminColumn::class,
+                Pipes\InstallHorizon::class,
+                Pipes\InstallPulse::class,
+                Pipes\UseHasSqids::class,
                 Pipes\RunRefactorScript::class,
                 Pipes\RunLintScript::class,
             ])
