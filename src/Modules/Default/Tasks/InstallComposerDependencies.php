@@ -2,20 +2,29 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Fabricate\Pipes;
+namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
-use Closure;
 use RedExplosion\Fabricate\Actions\RequireComposerPackagesAction;
-use RedExplosion\Fabricate\Data\InstallData;
+use RedExplosion\Fabricate\Task;
 
-class InstallComposerDependencies
+class InstallComposerDependencies extends Task
 {
     public function __construct(
         protected readonly RequireComposerPackagesAction $requireComposerPackages,
     ) {
     }
 
-    public function handle(InstallData $data, Closure $next)
+    public function progressLabel(): string
+    {
+        return 'Installing Composer dependencies';
+    }
+
+    public function progressHint(): string
+    {
+        return 'This may take some time, please wait.';
+    }
+
+    public function perform(): void
     {
         $this->requireComposerPackages->handle([
             // 'filament/filament',
@@ -30,7 +39,5 @@ class InstallComposerDependencies
             'rector/rector',
             'red-explosion/pint-config',
         ], asDev: true);
-
-        return $next($data);
     }
 }

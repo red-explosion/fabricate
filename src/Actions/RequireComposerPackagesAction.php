@@ -10,8 +10,6 @@ class RequireComposerPackagesAction
 {
     /**
      * @param  array<int, string>  $packages
-     * @param  bool  $asDev
-     * @return bool
      */
     public function handle(array $packages, bool $asDev = false): bool
     {

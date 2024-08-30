@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Fabricate\Pipes;
+namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
-use Closure;
 use Illuminate\Filesystem\Filesystem;
 use RedExplosion\Fabricate\Actions\ReplaceInFileAction;
-use RedExplosion\Fabricate\Data\InstallData;
+use RedExplosion\Fabricate\Task;
 
-class RemoveFillableAttributes
+class RemoveFillableAttributes extends Task
 {
     public function __construct(
         protected readonly ReplaceInFileAction $replaceInFile,
@@ -17,10 +16,15 @@ class RemoveFillableAttributes
     ) {
     }
 
-    public function handle(InstallData $data, Closure $next)
+    public function progressLabel(): string
+    {
+        return 'Removing fillable attributes';
+    }
+
+    public function perform(): void
     {
         $this->replaceInFile->handle(
-            <<<EOT
+            <<<'EOT'
 
                 /**
                  * The attributes that are mass assignable.
@@ -34,10 +38,9 @@ class RemoveFillableAttributes
 
         $contents = $this->filesystem->get(app_path('Models/User.php'));
 
+        /** @var string $contents */
         $contents = preg_replace('/protected \$fillable\s*=\s*\[[^\]]*\];\s*/m', '', $contents);
 
         $this->filesystem->put(app_path('Models/User.php'), $contents);
-
-        return $next($data);
     }
 }

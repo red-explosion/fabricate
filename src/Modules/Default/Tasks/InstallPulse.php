@@ -2,27 +2,31 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Fabricate\Pipes;
+namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
-use Closure;
 use RedExplosion\Fabricate\Actions\ReplaceInFileAction;
-use RedExplosion\Fabricate\Data\InstallData;
+use RedExplosion\Fabricate\Task;
 use Symfony\Component\Process\Process;
 
-class InstallPulse
+class InstallPulse extends Task
 {
     public function __construct(
         protected readonly ReplaceInFileAction $replaceInFile,
     ) {
     }
 
-    public function handle(InstallData $data, Closure $next)
+    public function progressLabel(): string
+    {
+        return 'Installing Pulse';
+    }
+
+    public function perform(): void
     {
         $publishCommand = [
             'php',
             'artisan',
             'vendor:publish',
-            '--provider="Laravel\Pulse\PulseServiceProvider"'
+            '--provider="Laravel\Pulse\PulseServiceProvider"',
         ];
 
         (new Process($publishCommand, base_path()))->run();
@@ -40,21 +44,19 @@ class InstallPulse
         );
 
         $this->replaceInFile->handle(
-            <<<EOT
+            <<<'EOT'
                     Relation::enforceMorphMap([
                         'user' => User::class,
                     ]);
             EOT,
-            <<<EOT
+            <<<'EOT'
                     Relation::enforceMorphMap([
                         'user' => User::class,
                     ]);
 
-                    Gate::define('viewPulse', fn (User \$user) => \$user->is_admin);
+                    Gate::define('viewPulse', fn (User $user) => $user->is_admin);
             EOT,
             app_path('Providers/AppServiceProvider.php'),
         );
-
-        return $next($data);
     }
 }

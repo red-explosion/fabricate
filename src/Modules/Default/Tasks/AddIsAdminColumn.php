@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Fabricate\Pipes;
+namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
-use Closure;
 use Illuminate\Filesystem\Filesystem;
 use RedExplosion\Fabricate\Actions\ReplaceInFileAction;
-use RedExplosion\Fabricate\Data\InstallData;
+use RedExplosion\Fabricate\Task;
 
-class AddIsAdminColumn
+class AddIsAdminColumn extends Task
 {
     public function __construct(
         protected readonly ReplaceInFileAction $replaceInFile,
@@ -17,24 +16,29 @@ class AddIsAdminColumn
     ) {
     }
 
-    public function handle(InstallData $data, Closure $next)
+    public function progressLabel(): string
+    {
+        return 'Adding is_admin column';
+    }
+
+    public function perform(): void
     {
         $this->replaceInFile->handle(
-            <<<EOT
-                        \$table->timestamps();
+            <<<'EOT'
+                        $table->timestamps();
             EOT,
-            <<<EOT
-                        \$table->boolean('is_admin')->default(false);
-                        \$table->timestamps();
+            <<<'EOT'
+                        $table->boolean('is_admin')->default(false);
+                        $table->timestamps();
             EOT,
             database_path('migrations/0001_01_01_000000_create_users_table.php'),
         );
 
         $this->replaceInFile->handle(
-            <<<EOT
+            <<<'EOT'
                         'password' => 'hashed',
             EOT,
-            <<<EOT
+            <<<'EOT'
                         'password' => 'hashed',
                         'is_admin' => 'boolean',
             EOT,
@@ -42,10 +46,10 @@ class AddIsAdminColumn
         );
 
         $this->replaceInFile->handle(
-            <<<EOT
+            <<<'EOT'
                         'remember_token' => Str::random(10),
             EOT,
-            <<<EOT
+            <<<'EOT'
                         'remember_token' => Str::random(10),
                         'is_admin' => false,
             EOT,
@@ -55,23 +59,20 @@ class AddIsAdminColumn
         // add admin state
         $userFactoryContents = $this->filesystem->get(database_path('factories/UserFactory.php'));
 
-        $adminState = <<<EOT
+        $adminState = <<<'EOT'
 
             public function admin(): static
             {
-                return \$this->state(fn (array \$attributes): array => [
+                return $this->state(fn (array $attributes): array => [
                     'is_admin' => true,
                 ]);
             }
         }
         EOT;
 
-
         $this->filesystem->put(
             database_path('factories/UserFactory.php'),
             substr($userFactoryContents, 0, -2) . $adminState,
         );
-
-        return $next($data);
     }
 }

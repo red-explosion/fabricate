@@ -2,21 +2,25 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Fabricate\Pipes;
+namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
-use Closure;
 use RedExplosion\Fabricate\Actions\ReplaceInFileAction;
-use RedExplosion\Fabricate\Data\InstallData;
+use RedExplosion\Fabricate\Task;
 use Symfony\Component\Process\Process;
 
-class InstallHorizon
+class InstallHorizon extends Task
 {
     public function __construct(
         protected readonly ReplaceInFileAction $replaceInFile,
     ) {
     }
 
-    public function handle(InstallData $data, Closure $next)
+    public function progressLabel(): string
+    {
+        return 'Installing Horizon';
+    }
+
+    public function perform(): void
     {
         (new Process(['php', 'artisan', 'horizon:install'], base_path()))->run();
 
@@ -27,14 +31,14 @@ class InstallHorizon
         );
 
         $this->replaceInFile->handle(
-            <<<EOT
+            <<<'EOT'
                     'local' => [
                         'default-supervisor' => [
                             'maxProcesses' => 3,
                         ],
                     ],
             EOT,
-            <<<EOT
+            <<<'EOT'
                     'staging' => [
                         'default-supervisor' => [
                             'maxProcesses' => 10,
@@ -53,22 +57,33 @@ class InstallHorizon
         );
 
         $this->replaceInFile->handle(
-            <<<EOT
-                    Gate::define('viewHorizon', function (\$user) {
-                        return in_array(\$user->email, [
+            <<<'EOT'
+            use Illuminate\Support\Facades\Gate;
+            EOT,
+            <<<'EOT'
+            use App\Models\User;
+            use Illuminate\Support\Facades\Gate;
+            EOT,
+            app_path('Providers/HorizonServiceProvider.php'),
+        );
+
+        $this->replaceInFile->handle(
+            <<<'EOT'
+                    Gate::define('viewHorizon', function ($user) {
+                        return in_array($user->email, [
                             //
                         ]);
                     });
             EOT,
-            <<<EOT
-                    Gate::define('viewHorizon', fn (User \$user) => \$user->is_admin);
+            <<<'EOT'
+                    Gate::define('viewHorizon', fn (User $user) => $user->is_admin);
             EOT,
             app_path('Providers/HorizonServiceProvider.php'),
         );
 
         // register snapshot command
         $this->replaceInFile->handle(
-            <<<EOT
+            <<<'EOT'
             declare(strict_types=1);
             EOT,
             <<<EOT
@@ -80,7 +95,5 @@ class InstallHorizon
             EOT,
             base_path('routes/console.php'),
         );
-
-        return $next($data);
     }
 }

@@ -2,31 +2,34 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Fabricate\Pipes;
+namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
-use Closure;
 use Illuminate\Filesystem\Filesystem;
-use RedExplosion\Fabricate\Data\InstallData;
+use RedExplosion\Fabricate\Task;
 
-class RemoveDownMigrations
+class RemoveMigrationComments extends Task
 {
     public function __construct(
         protected readonly Filesystem $filesystem,
     ) {
     }
 
-    public function handle(InstallData $data, Closure $next)
+    public function progressLabel(): string
+    {
+        return 'Removing migration comments';
+    }
+
+    public function perform(): void
     {
         $migrations = $this->filesystem->files(database_path('migrations'));
 
         foreach ($migrations as $migration) {
             $contents = $this->filesystem->get($migration->getPathname());
 
-            $contents = preg_replace('/public function down\(\): void\s*\{[^}]*\}/s', '', $contents);
+            /** @var string $contents */
+            $contents = preg_replace('/\/\*\*[\s\S]*?\*\//', '', $contents);
 
             $this->filesystem->put($migration->getPathname(), $contents);
         }
-
-        return $next($data);
     }
 }

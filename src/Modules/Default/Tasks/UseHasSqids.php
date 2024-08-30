@@ -2,20 +2,24 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Fabricate\Pipes;
+namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
-use Closure;
 use RedExplosion\Fabricate\Actions\ReplaceInFileAction;
-use RedExplosion\Fabricate\Data\InstallData;
+use RedExplosion\Fabricate\Task;
 
-class UseHasSqids
+class UseHasSqids extends Task
 {
     public function __construct(
         protected readonly ReplaceInFileAction $replaceInFile,
     ) {
     }
 
-    public function handle(InstallData $data, Closure $next)
+    public function progressLabel(): string
+    {
+        return 'Adding HasSqids to models';
+    }
+
+    public function perform(): void
     {
         $this->replaceInFile->handle(
             <<<EOT
@@ -29,16 +33,14 @@ class UseHasSqids
         );
 
         $this->replaceInFile->handle(
-            <<<EOT
+            <<<'EOT'
             use Notifiable;
             EOT,
-            <<<EOT
+            <<<'EOT'
             use HasSqids;
             use Notifiable;
             EOT,
             app_path('Models/User.php'),
         );
-
-        return $next($data);
     }
 }

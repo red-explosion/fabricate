@@ -2,20 +2,24 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Fabricate\Pipes;
+namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
-use Closure;
 use Illuminate\Filesystem\Filesystem;
-use RedExplosion\Fabricate\Data\InstallData;
+use RedExplosion\Fabricate\Task;
 
-class RegisterComposerScripts
+class RegisterComposerScripts extends Task
 {
     public function __construct(
         protected readonly Filesystem $filesystem,
     ) {
     }
 
-    public function handle(InstallData $data, Closure $next)
+    public function progressLabel(): string
+    {
+        return 'Registering Composer scripts';
+    }
+
+    public function perform(): void
     {
         $contents = $this->filesystem->json(base_path('composer.json'));
 
@@ -35,8 +39,9 @@ class RegisterComposerScripts
             ],
         ]);
 
-        $this->filesystem->put(base_path('composer.json'), json_encode($contents, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        /** @var string $contents */
+        $contents = json_encode($contents, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-        return $next($data);
+        $this->filesystem->put(base_path('composer.json'), $contents);
     }
 }

@@ -2,21 +2,24 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Fabricate\Pipes;
+namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
-use Closure;
-use Illuminate\Filesystem\Filesystem;
 use RedExplosion\Fabricate\Actions\ReplaceInFileAction;
-use RedExplosion\Fabricate\Data\InstallData;
+use RedExplosion\Fabricate\Task;
 
-class FixLarastanErrors
+class FixLarastanErrors extends Task
 {
     public function __construct(
         protected readonly ReplaceInFileAction $replaceInFile,
     ) {
     }
 
-    public function handle(InstallData $data, Closure $next)
+    public function progressLabel(): string
+    {
+        return 'Fixing Larastan errors';
+    }
+
+    public function perform(): void
     {
         $this->replaceInFile->handle(
             'use Illuminate\Database\Eloquent\Factories\HasFactory;',
@@ -29,7 +32,7 @@ class FixLarastanErrors
 
         $this->replaceInFile->handle(
             'use HasFactory;',
-            <<<EOT
+            <<<'EOT'
                 /** @use HasFactory<UserFactory> */
                 use HasFactory;
             EOT,
@@ -48,7 +51,5 @@ class FixLarastanErrors
             '',
             base_path('routes/console.php'),
         );
-
-        return $next($data);
     }
 }

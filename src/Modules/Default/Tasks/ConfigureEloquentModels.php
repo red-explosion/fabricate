@@ -2,20 +2,24 @@
 
 declare(strict_types=1);
 
-namespace RedExplosion\Fabricate\Pipes;
+namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
-use Closure;
 use RedExplosion\Fabricate\Actions\ReplaceInFileAction;
-use RedExplosion\Fabricate\Data\InstallData;
+use RedExplosion\Fabricate\Task;
 
-class ConfigureEloquentModels
+class ConfigureEloquentModels extends Task
 {
     public function __construct(
         protected readonly ReplaceInFileAction $replaceInFile,
     ) {
     }
 
-    public function handle(InstallData $data, Closure $next)
+    public function progressLabel(): string
+    {
+        return 'Configuring Eloquent models';
+    }
+
+    public function perform(): void
     {
         $this->replaceInFile->handle(
             <<<EOT
@@ -32,26 +36,26 @@ class ConfigureEloquentModels
         );
 
         $this->replaceInFile->handle(
-            <<<EOT
+            <<<'EOT'
                 public function boot(): void
                 {
 
                 }
             EOT,
-            <<<EOT
+            <<<'EOT'
                 public function boot(): void
                 {
                     Model::unguard();
 
-                    Model::preventLazyLoading(! \$this->app->isProduction());
+                    Model::preventLazyLoading(! $this->app->isProduction());
                     Model::preventSilentlyDiscardingAttributes();
                     Model::preventAccessingMissingAttributes();
 
-                    if (\$this->app->isProduction()) {
-                        Model::handleLazyLoadingViolationUsing(function (Model \$model, string \$relation): void {
-                            \$class = \$model::class;
+                    if ($this->app->isProduction()) {
+                        Model::handleLazyLoadingViolationUsing(function (Model $model, string $relation): void {
+                            $class = $model::class;
 
-                            Log::warning("Attempted to lazy load [{\$relation}] on model [{\$class}].");
+                            Log::warning("Attempted to lazy load [{$relation}] on model [{$class}].");
                         });
                     }
 
@@ -62,7 +66,5 @@ class ConfigureEloquentModels
             EOT,
             base_path('app/Providers/AppServiceProvider.php'),
         );
-
-        return $next($data);
     }
 }

@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace RedExplosion\Fabricate\Console;
 
 use Illuminate\Console\Command;
-use RedExplosion\Fabricate\Data\InstallData;
-use RedExplosion\Fabricate\Install;
+use Laravel\Prompts\Progress;
+use RedExplosion\Fabricate\Modules\Default\DefaultModule;
+use RedExplosion\Fabricate\Task;
+
+use function Laravel\Prompts\progress;
 
 class InstallCommand extends Command
 {
@@ -14,8 +17,24 @@ class InstallCommand extends Command
 
     protected $description = 'Install the Fabricate scaffolding';
 
-    public function handle(Install $install): void
+    public function handle(): void
     {
-         $install->process(new InstallData());
+        $tasks = DefaultModule::tasks();
+
+        progress(
+            label: 'Installing Fabricate',
+            steps: $tasks,
+            callback: function ($taskClass, Progress $progress): void {
+                /** @var Task $task */
+                $task = app($taskClass);
+
+                $progress
+                    ->label($task->progressLabel())
+                    ->hint($task->progressHint())
+                    ->render();
+
+                $task->perform();
+            },
+        );
     }
 }
