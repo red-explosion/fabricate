@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
 use RedExplosion\Fabricate\Actions\ReplaceInFileAction;
+use RedExplosion\Fabricate\Data\InstallData;
 use RedExplosion\Fabricate\Task;
 use Symfony\Component\Process\Process;
 
@@ -20,7 +21,7 @@ class InstallPulse extends Task
         return 'Installing Pulse';
     }
 
-    public function perform(): void
+    public function perform(InstallData $data): void
     {
         $publishCommand = [
             'php',

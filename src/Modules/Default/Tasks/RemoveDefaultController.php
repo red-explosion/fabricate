@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
 use Illuminate\Filesystem\Filesystem;
+use RedExplosion\Fabricate\Data\InstallData;
 use RedExplosion\Fabricate\Task;
 
 class RemoveDefaultController extends Task
@@ -19,7 +20,7 @@ class RemoveDefaultController extends Task
         return 'Removing default controller';
     }
 
-    public function perform(): void
+    public function perform(InstallData $data): void
     {
         $this->filesystem->delete(base_path('app/Http/Controllers/Controller.php'));
 

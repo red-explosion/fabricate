@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
 use Illuminate\Filesystem\Filesystem;
+use RedExplosion\Fabricate\Data\InstallData;
 use RedExplosion\Fabricate\Task;
 use Symfony\Component\Process\Process;
 
@@ -20,7 +21,7 @@ class RegisterHelpersFile extends Task
         return 'Registering helper files';
     }
 
-    public function perform(): void
+    public function perform(InstallData $data): void
     {
         $composer = $this->filesystem->json(base_path('composer.json'));
 

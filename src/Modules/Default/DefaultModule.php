@@ -17,6 +17,7 @@ class DefaultModule implements Module
     {
         return [
             // todo: composer meta
+            Tasks\UpdateComposerMeta::class,
             Tasks\InstallComposerDependencies::class,
             Tasks\InstallYarnDependencies::class,
             Tasks\PublishStubs::class,

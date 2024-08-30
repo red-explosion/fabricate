@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace RedExplosion\Fabricate;
 
+use RedExplosion\Fabricate\Data\InstallData;
+
 abstract class Task
 {
     abstract public function progressLabel(): string;
 
-    public function progressHint(): string
-    {
-        return '';
-    }
-
-    abstract public function perform(): void;
+    abstract public function perform(InstallData $data): void;
 }

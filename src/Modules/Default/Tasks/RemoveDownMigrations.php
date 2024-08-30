@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
 use Illuminate\Filesystem\Filesystem;
+use RedExplosion\Fabricate\Data\InstallData;
 use RedExplosion\Fabricate\Task;
 
 class RemoveDownMigrations extends Task
@@ -19,7 +20,7 @@ class RemoveDownMigrations extends Task
         return 'Removing down migrations';
     }
 
-    public function perform(): void
+    public function perform(InstallData $data): void
     {
         $migrations = $this->filesystem->files(database_path('migrations'));
 

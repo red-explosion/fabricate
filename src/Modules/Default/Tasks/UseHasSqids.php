@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
 use RedExplosion\Fabricate\Actions\ReplaceInFileAction;
+use RedExplosion\Fabricate\Data\InstallData;
 use RedExplosion\Fabricate\Task;
 
 class UseHasSqids extends Task
@@ -19,7 +20,7 @@ class UseHasSqids extends Task
         return 'Adding HasSqids to models';
     }
 
-    public function perform(): void
+    public function perform(InstallData $data): void
     {
         $this->replaceInFile->handle(
             <<<EOT

@@ -6,6 +6,7 @@ namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
 use Illuminate\Filesystem\Filesystem;
 use RedExplosion\Fabricate\Actions\ReplaceInFileAction;
+use RedExplosion\Fabricate\Data\InstallData;
 use RedExplosion\Fabricate\Task;
 
 class ConfigureTestingDatabase extends Task
@@ -21,7 +22,7 @@ class ConfigureTestingDatabase extends Task
         return 'Configuring testing database';
     }
 
-    public function perform(): void
+    public function perform(InstallData $data): void
     {
         $this->filesystem->move(
             base_path('phpunit.xml'),

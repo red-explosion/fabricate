@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
 use Illuminate\Filesystem\Filesystem;
+use RedExplosion\Fabricate\Data\InstallData;
 use RedExplosion\Fabricate\Task;
 
 class RemoveMigrationComments extends Task
@@ -19,7 +20,7 @@ class RemoveMigrationComments extends Task
         return 'Removing migration comments';
     }
 
-    public function perform(): void
+    public function perform(InstallData $data): void
     {
         $migrations = $this->filesystem->files(database_path('migrations'));
 

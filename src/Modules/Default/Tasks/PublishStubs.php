@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
 use Illuminate\Filesystem\Filesystem;
+use RedExplosion\Fabricate\Data\InstallData;
 use RedExplosion\Fabricate\Task;
 
 class PublishStubs extends Task
@@ -19,7 +20,7 @@ class PublishStubs extends Task
         return 'Publishing stubs';
     }
 
-    public function perform(): void
+    public function perform(InstallData $data): void
     {
         $this->filesystem->copyDirectory(
             __DIR__ . '/../../../../stubs/default/.github',

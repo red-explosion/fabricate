@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
 use RedExplosion\Fabricate\Actions\ReplaceInFileAction;
+use RedExplosion\Fabricate\Data\InstallData;
 use RedExplosion\Fabricate\Task;
 
 class FixLarastanErrors extends Task
@@ -19,7 +20,7 @@ class FixLarastanErrors extends Task
         return 'Fixing Larastan errors';
     }
 
-    public function perform(): void
+    public function perform(InstallData $data): void
     {
         $this->replaceInFile->handle(
             'use Illuminate\Database\Eloquent\Factories\HasFactory;',

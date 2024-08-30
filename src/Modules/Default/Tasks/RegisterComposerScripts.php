@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
 use Illuminate\Filesystem\Filesystem;
+use RedExplosion\Fabricate\Data\InstallData;
 use RedExplosion\Fabricate\Task;
 
 class RegisterComposerScripts extends Task
@@ -19,7 +20,7 @@ class RegisterComposerScripts extends Task
         return 'Registering Composer scripts';
     }
 
-    public function perform(): void
+    public function perform(InstallData $data): void
     {
         $contents = $this->filesystem->json(base_path('composer.json'));
 

@@ -6,6 +6,7 @@ namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
 use Illuminate\Filesystem\Filesystem;
 use RedExplosion\Fabricate\Actions\ReplaceInFileAction;
+use RedExplosion\Fabricate\Data\InstallData;
 use RedExplosion\Fabricate\Task;
 
 class RemoveFillableAttributes extends Task
@@ -21,7 +22,7 @@ class RemoveFillableAttributes extends Task
         return 'Removing fillable attributes';
     }
 
-    public function perform(): void
+    public function perform(InstallData $data): void
     {
         $this->replaceInFile->handle(
             <<<'EOT'
