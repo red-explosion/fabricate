@@ -1,6 +1,6 @@
 {
     "name": "red-explosion/fabricate",
-    "description": "An opionated yet flexible package for scaffolding new Laravel applications.",
+    "description": "An opinionated yet flexible package for scaffolding new Laravel applications.",
     "license": "MIT",
     "homepage": "https://github.com/red-explosion/fabricate",
     "type": "library",
