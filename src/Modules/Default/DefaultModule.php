@@ -16,7 +16,6 @@ class DefaultModule implements Module
     public static function tasks(): array
     {
         return [
-            // todo: composer meta
             Tasks\UpdateComposerMeta::class,
             Tasks\InstallComposerDependencies::class,
             Tasks\InstallYarnDependencies::class,
@@ -33,6 +32,8 @@ class DefaultModule implements Module
             Tasks\ConfigureEloquentModels::class,
             Tasks\RemoveFillableAttributes::class,
             Tasks\AddIsAdminColumn::class,
+            Tasks\ImplementMustVerifyEmail::class,
+            Tasks\QueueAuthNotifications::class,
             Tasks\InstallHorizon::class,
             Tasks\InstallPulse::class,
             Tasks\UseHasSqids::class,

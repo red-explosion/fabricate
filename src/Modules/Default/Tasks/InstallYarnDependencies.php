@@ -26,8 +26,6 @@ class InstallYarnDependencies extends Task
         $this->filesystem->deleteDirectory(base_path('node_modules'));
         $this->filesystem->delete(base_path('package.lock'));
 
-        // TODO: log that we are installing Yarn dependencies
-
         (new Process(['yarn', 'install'], base_path()))->run();
     }
 }

@@ -23,7 +23,6 @@ class InstallComposerDependencies extends Task
     public function perform(InstallData $data): void
     {
         $this->requireComposerPackages->handle([
-            // 'filament/filament',
             'laravel/horizon',
             'laravel/pulse',
             'red-explosion/laravel-sqids',

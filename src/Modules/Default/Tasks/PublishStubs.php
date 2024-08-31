@@ -28,6 +28,11 @@ class PublishStubs extends Task
         );
 
         $this->filesystem->copyDirectory(
+            __DIR__ . '/../../../../stubs/default/app/Notifications',
+            app_path('Notifications'),
+        );
+
+        $this->filesystem->copyDirectory(
             __DIR__ . '/../../../../stubs/default/app/Support',
             app_path('Support'),
         );

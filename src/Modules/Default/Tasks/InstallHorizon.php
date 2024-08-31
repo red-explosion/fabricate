@@ -82,7 +82,6 @@ class InstallHorizon extends Task
             app_path('Providers/HorizonServiceProvider.php'),
         );
 
-        // register snapshot command
         $this->replaceInFile->handle(
             <<<'EOT'
             declare(strict_types=1);

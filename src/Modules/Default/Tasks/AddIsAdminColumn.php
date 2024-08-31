@@ -57,7 +57,6 @@ class AddIsAdminColumn extends Task
             database_path('factories/UserFactory.php'),
         );
 
-        // add admin state
         $userFactoryContents = $this->filesystem->get(database_path('factories/UserFactory.php'));
 
         $adminState = <<<'EOT'
