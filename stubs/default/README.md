@@ -1,18 +1,18 @@
-# Project Name
+# project_name
 
 ## Holla 👋
 
-Hello and welcome to the Project Name codebase. This README has been written to provide you with all the information
+Hello and welcome to the project_name codebase. This README has been written to provide you with all the information
 you need to get up and running with the project. Like any piece of software, things are constantly changing and it's
 easy for information to become outdated.
 
-At Red Explosion, we take pride in the code we write to help deliver our companies mission. We love what we do and we
+At vendor_name, we take pride in the code we write to help deliver our companies mission. We love what we do and we
 take pride in our work. We're so excited to see what contributions you make to this project, but all we ask is that you
 keep information such as installation steps, documentation and tests up to date 🙇
 
 ## Installation
 
-Project Name is a regular Laravel application; it's build on top of Laravel 11 and uses X for the frontend. If you are
+project_name is a regular Laravel application; it's build on top of Laravel 11 and uses X for the frontend. If you are
 familiar with Laravel, you should feel right at home.
 
 In terms of local development, you will need the following requirements:

@@ -37,6 +37,7 @@ class DefaultModule implements Module
             Tasks\InstallHorizon::class,
             Tasks\InstallPulse::class,
             Tasks\UseHasSqids::class,
+            Tasks\ReplaceReadmePlaceholders::class,
             Tasks\RunRefactorScript::class,
             Tasks\RunLintScript::class,
         ];

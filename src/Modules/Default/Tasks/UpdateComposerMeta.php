@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RedExplosion\Fabricate\Modules\Default\Tasks;
 
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 use RedExplosion\Fabricate\Data\InstallData;
 use RedExplosion\Fabricate\Task;
 use Symfony\Component\Process\Process;
@@ -31,7 +32,7 @@ class UpdateComposerMeta extends Task
 
         $contents = [
             ...$contents,
-            'name' => $data->name,
+            'name' => Str::slug($data->vendor) . '/' . Str::slug($data->name),
             'license' => 'proprietary',
         ];
 

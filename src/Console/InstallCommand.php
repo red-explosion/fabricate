@@ -23,13 +23,14 @@ class InstallCommand extends Command
     {
         $name = text(
             label: 'Enter a name for your project',
-            placeholder: 'red-explosion/project-name',
-            validate: [
-                'name' => [
-                    'required',
-                    'regex:/^[a-z0-9\-]+\/[a-z0-9\-]+$/',
-                ],
-            ],
+            placeholder: 'Project Name',
+            required: true,
+        );
+
+        $vendor = text(
+            label: 'Enter a vendor name for your project',
+            placeholder: 'Red Explosion',
+            required: true,
         );
 
         $description = text(
@@ -37,7 +38,11 @@ class InstallCommand extends Command
             placeholder: 'The source code for the Project Name website.',
         );
 
-        $installData = new InstallData(name: $name, description: $description);
+        $installData = new InstallData(
+            name: $name,
+            vendor: $vendor,
+            description: $description,
+        );
 
         $tasks = DefaultModule::tasks();
 
