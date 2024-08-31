@@ -1,24 +1,34 @@
 <p align="center"><img src="/art/logo.svg" height="68" alt="Fabricate"></p>
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/red-explosion/fabricate.svg?style=flat-square)](https://packagist.org/packages/red-explosion/fabricate)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/red-explosion/fabricate/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/red-explosion/fabricate/actions/workflows/tests.yml?query=branch:main)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/red-explosion/fabricate/coding-standards.yml?label=code%20style&style=flat-square)](https://github.com/red-explosion/fabricate/actions/workflows/coding-standards.yml?query=branch:main)
-[![Total Downloads](https://img.shields.io/packagist/dt/red-explosion/fabricate.svg?style=flat-square)](https://packagist.org/packages/red-explosion/fabricate)
+<p align="center">
+    <a href="https://packagist.org/packages/red-explosion/fabricate">
+        <img src="https://img.shields.io/packagist/v/red-explosion/fabricate.svg?style=flat-square" alt="Latest Version on Packagist">
+    </a>
+    <a href="https://github.com/red-explosion/fabricate/actions/workflows/tests.yml?query=branch:main">
+        <img src="https://img.shields.io/github/actions/workflow/status/red-explosion/fabricate/tests.yml?branch=main&label=tests&style=flat-square" alt="GitHub Tests Action Status">
+    </a>
+    <a href="https://github.com/red-explosion/fabricate/actions/workflows/coding-standards.yml?query=branch:main">
+        <img src="https://img.shields.io/github/actions/workflow/status/red-explosion/fabricate/coding-standards.yml?label=code%20style&style=flat-square" alt="GitHub Code Style Action Status">
+    </a>
+    <a href="https://packagist.org/packages/red-explosion/fabricate">
+        <img src="https://img.shields.io/packagist/dt/red-explosion/fabricate.svg?style=flat-square" alt="Total Downloads">
+    </a>
+</p>
 
 ## Introduction
 
-After creating multiple projects over the years, we found that we were repeating the same steps over and over again.
-Install these packages, add these files, delete the files etc. and it got to a point where it became tedious. That's
-where Fabricate comes in.
+After creating multiple projects, we found that we were repeating the same steps over and over again when we started a
+new project. Install these packages, add these files, delete the files etc. and it got to a point where it became
+tedious. That's where Fabricate comes in.
 
-Fabricate is an opinionated yet flexible package for building Laravel applications. It installs a number of recommended
-packages, publishes stub files (such as architecture tests) and much more. Fabricate is designed to work with a blank
-Laravel or any of the official starter kits.
+Fabricate is an opinionated yet flexible package for scaffolding Laravel applications. It installs a number of
+recommended packages, publishes stub files (such as architecture tests) and much more. Fabricate is designed to work
+with a blank Laravel or any of the official starter kits.
 
 ## Installation
 
 First, you should [create a new Laravel application](https://laravel.com/docs/11.x/installation). Fabricate is designed
-to work with any of the Laravel starter kits or a blank Laravel application.
+to work with a blank Laravel or any of the official starter kits.
 
 Once you have created a new Laravel application, you will need to install Fabricate using Composer:
 
