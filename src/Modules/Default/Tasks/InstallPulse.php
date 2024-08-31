@@ -27,7 +27,7 @@ class InstallPulse extends Task
             'php',
             'artisan',
             'vendor:publish',
-            '--provider="Laravel\Pulse\PulseServiceProvider"',
+            '--provider=Laravel\Pulse\PulseServiceProvider',
         ];
 
         (new Process($publishCommand, base_path()))->run();
