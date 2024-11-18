@@ -25,6 +25,7 @@ class InstallComposerDependencies extends Task
         $this->requireComposerPackages->handle([
             'laravel/horizon',
             'laravel/pulse',
+            'league/flysystem-aws-s3-v3:^3.0',
             'red-explosion/laravel-sqids',
             'spatie/laravel-data',
         ]);
