@@ -17,7 +17,9 @@ class DefaultModule implements Module
     {
         return [
             Tasks\UpdateComposerMeta::class,
+            Tasks\RemoveComposerDependencies::class,
             Tasks\InstallComposerDependencies::class,
+            Tasks\InstallPest::class,
             Tasks\InstallYarnDependencies::class,
             Tasks\PublishStubs::class,
             Tasks\RegisterComposerScripts::class,

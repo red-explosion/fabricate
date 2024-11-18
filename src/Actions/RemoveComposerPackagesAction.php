@@ -6,7 +6,7 @@ namespace RedExplosion\Fabricate\Actions;
 
 use Symfony\Component\Process\Process;
 
-class RequireComposerPackagesAction
+class RemoveComposerPackagesAction
 {
     /**
      * @param  array<int, string>  $packages
@@ -14,10 +14,9 @@ class RequireComposerPackagesAction
     public function handle(array $packages, bool $asDev = false): bool
     {
         $command = array_merge(
-            ['composer', 'require'],
+            ['composer', 'remove'],
             $packages,
             $asDev ? ['--dev'] : [],
-            ['--with-all-dependencies'],
         );
 
         return (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))

@@ -25,13 +25,15 @@ class InstallComposerDependencies extends Task
         $this->requireComposerPackages->handle([
             'laravel/horizon',
             'laravel/pulse',
-            'league/flysystem-aws-s3-v3:^3.0',
+            // 'league/flysystem-aws-s3-v3:^3.0',
             'red-explosion/laravel-sqids',
             'spatie/laravel-data',
         ]);
 
         $this->requireComposerPackages->handle([
             'larastan/larastan',
+            'pestphp/pest',
+            'pestphp/pest-plugin-laravel',
             'rector/rector',
             'red-explosion/pint-config',
         ], asDev: true);
