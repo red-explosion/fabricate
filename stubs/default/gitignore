@@ -36,4 +36,4 @@ _ide_helper.php
 _ide_helper_models.php
 auth.json
 phpstan.neon
-phpunit.xml.dist
+phpunit.xml
