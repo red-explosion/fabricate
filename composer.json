@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.3",
         "illuminate/support": "^11.0",
-        "laravel/prompts": "^0.1.25"
+        "laravel/prompts": "^0.3"
     },
     "require-dev": {
         "laravel/pint": "^1.10",
