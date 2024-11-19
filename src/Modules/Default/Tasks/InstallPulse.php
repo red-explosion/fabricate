@@ -46,14 +46,10 @@ class InstallPulse extends Task
 
         $this->replaceInFile->handle(
             <<<'EOT'
-                    Relation::enforceMorphMap([
-                        'user' => User::class,
-                    ]);
+                    $this->configurePasswordDefaults();
             EOT,
             <<<'EOT'
-                    Relation::enforceMorphMap([
-                        'user' => User::class,
-                    ]);
+                    $this->configurePasswordDefaults();
 
                     Gate::define('viewPulse', fn (User $user) => $user->is_admin);
             EOT,

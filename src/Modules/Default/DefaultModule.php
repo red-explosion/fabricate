@@ -31,7 +31,7 @@ class DefaultModule implements Module
             Tasks\RemoveDefaultController::class,
             Tasks\RemoveMigrationComments::class,
             Tasks\RemoveDownMigrations::class,
-            Tasks\ConfigureEloquentModels::class,
+            Tasks\ConfigureAppServiceProvider::class,
             Tasks\RemoveFillableAttributes::class,
             Tasks\AddIsAdminColumn::class,
             Tasks\ImplementMustVerifyEmail::class,
