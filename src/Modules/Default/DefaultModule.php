@@ -27,6 +27,7 @@ class DefaultModule implements Module
             Tasks\RunLintScript::class,
             Tasks\RegisterHelpersFile::class,
             Tasks\FixLarastanErrors::class,
+            Tasks\RemoveExampleTests::class,
             Tasks\ConfigureTestingDatabase::class,
             Tasks\RegisterArchTest::class,
             Tasks\RemoveDefaultController::class,
