@@ -24,7 +24,7 @@ class InstallYarnDependencies extends Task
     public function perform(InstallData $data): void
     {
         $this->filesystem->deleteDirectory(base_path('node_modules'));
-        $this->filesystem->delete(base_path('package.lock'));
+        $this->filesystem->delete(base_path('package-lock.json'));
 
         (new Process(['yarn', 'install'], base_path()))->run();
     }
