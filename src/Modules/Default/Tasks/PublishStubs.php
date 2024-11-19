@@ -38,7 +38,7 @@ class PublishStubs extends Task
         );
 
         $this->filesystem->copyDirectory(
-            __DIR__ . '/../../../../stubs/default',
+            __DIR__ . '/../../../../stubs/default/stubs',
             base_path('stubs'),
         );
 
