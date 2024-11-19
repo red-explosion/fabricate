@@ -28,6 +28,7 @@ class DefaultModule implements Module
             Tasks\RegisterHelpersFile::class,
             Tasks\FixLarastanErrors::class,
             Tasks\ConfigureTestingDatabase::class,
+            Tasks\RegisterArchTest::class,
             Tasks\RemoveDefaultController::class,
             Tasks\RemoveMigrationComments::class,
             Tasks\RemoveDownMigrations::class,

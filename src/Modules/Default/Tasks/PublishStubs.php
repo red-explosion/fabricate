@@ -42,9 +42,9 @@ class PublishStubs extends Task
             base_path('stubs'),
         );
 
-        $this->filesystem->copyDirectory(
-            __DIR__ . '/../../../../stubs/default/tests/Arch',
-            base_path('tests/Arch'),
+        $this->filesystem->copy(
+            __DIR__ . '/../../../../stubs/default/tests/ArchTest.php',
+            base_path('tests/ArchTest.php'),
         );
 
         $this->filesystem->copy(
